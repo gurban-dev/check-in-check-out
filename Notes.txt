@@ -1,0 +1,32 @@
+mkdir check-in-check-out
+
+cd check-in-check-out
+
+Create a Django project for the backend/server-side of the
+application:
+django-admin startproject backend
+
+Django is a high-level Python web framework that helps developers
+build secure, scalable, and maintainable web applications quickly.
+It provides all the essential tools like handling URLs, working
+with databases, and managing user authentication so you can focus
+on your app's features instead of reinventing the wheel.
+
+Create a virtual environment folder inside the root folder
+of the Django project:
+python3 -m venv .venv
+
+Windows OS:
+python -m venv .venv
+
+A virtual environment prevents version conflicts.
+Your computer may have a different version of Python than the
+one used in your Django project. Having an isolated environment
+prevents these two different versions of Python from clashing.
+
+The . that precedes "venv" indicates that the virtual environment
+folder will be hidden which ensures that it is not pushed to a
+GitHub repository.
+
+Activate the virtual environment in Windows OS:
+venv\Scripts\activate
