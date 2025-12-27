@@ -1,32 +1,92 @@
-mkdir check-in-check-out
+Initialising a Git repository:
+git init
 
-cd check-in-check-out
+Add all files in the current directory that should be included in
+the next commit:
+git add .
 
-Create a Django project for the backend/server-side of the
-application:
-django-admin startproject backend
+Create the commit with an attached message:
+git commit -m "attached_message"
 
-Django is a high-level Python web framework that helps developers
-build secure, scalable, and maintainable web applications quickly.
-It provides all the essential tools like handling URLs, working
-with databases, and managing user authentication so you can focus
-on your app's features instead of reinventing the wheel.
+Rename the current Git branch to main, using the -M flag to force
+the rename if necessary:
+git branch -M main
 
-Create a virtual environment folder inside the root folder
-of the Django project:
-python3 -m venv .venv
+Add a remote repository to your local Git project:
+git remote add origin <remote_repository_URL>
 
-Windows OS:
-python -m venv .venv
+origin is the name you assign to the remote (a common default name).
 
-A virtual environment prevents version conflicts.
-Your computer may have a different version of Python than the
-one used in your Django project. Having an isolated environment
-prevents these two different versions of Python from clashing.
+<repository_URL> is the URL of the remote GitHub repository.
 
-The . that precedes "venv" indicates that the virtual environment
-folder will be hidden which ensures that it is not pushed to a
-GitHub repository.
+Push the local main branch to the remote repository (origin) and
+set it as the default upstream branch:
+git push -u origin main
 
-Activate the virtual environment in Windows OS:
-venv\Scripts\activate
+
+Techsmart is the platform used by a teacher at her school to
+teach kids.
+
+This platform was purchased by the district.
+
+The teacher thinks that Visual Studio Code will be able to be
+used on a school computer.
+
+
+Model Breakdown:
+1. Student Model
+
+Stores basic student info (ID, name, grade)
+Tracks cumulative prayer time in total_prayer_time_minutes
+Automatically updates when visits are completed
+Methods to get formatted time displays
+
+2. BellSchedule Model
+
+Stores class periods for each day of the week
+Supports different schedules for different days (Mon-Fri)
+Key method: get_current_period() - automatically determines if
+            student left during class
+Can define multiple periods per day (Period 1, Period 2, Lunch, etc.)
+
+In middle school, Monday and Friday have the same schedule.
+
+3. Visit Model (replaces Departure)
+This is the core tracking model with:
+Student Information Fields:
+
+first_name, last_name - captured at check-in
+student_id_at_visit - ID at time of visit
+Foreign key to Student model
+
+Time Tracking Fields:
+
+left_classroom_at - Student manually enters this
+checked_in_at - Auto-recorded when they arrive at prayer room
+checked_out_at - Auto-recorded when they leave prayer room
+
+Calculated Duration Fields:
+
+transit_time_minutes - Travel time (classroom → prayer room)
+prayer_duration_minutes - Time in prayer room (for admin reports)
+total_absence_minutes - Total time gone from class
+
+Bell Schedule Integration:
+
+period_when_left - Which class period they left during
+check_if_student_arrived_during_first_fifteen_minutes - Boolean flag
+if the student checks in during the first fifteen minutes of a
+class.
+
+check_if_student_left_during_first_fifteen_minutes - Boolean flag
+if the student checks out during the first fifteen minutes of a
+class.
+
+The student can leave during the class so long as they have
+a green hall pass.
+
+Checks out at 1 PM, but checked in the office at 1:30 PM.
+Calculate how many minutes between the time they left the
+classroom and the time they checked in, in the office.
+
+Compte the total time they were outside of the classroom.
